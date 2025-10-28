@@ -2,6 +2,14 @@
 
 This Blueprint provisions a Google Cloud Platform (GCP) Virtual Machine (VM).
 
+In particular, it creates the following resources:
+- Compute Instance
+- Compute Disk
+- Compute Network
+- Compute Subnetwork
+
+which represent the minimal set of resources required to create a VM in GCP.
+
 ## Requirements
 
 - Install and setup Config Connector in your cluster. Follow the official instructions [here](https://cloud.google.com/config-connector/docs/how-to/install-other-kubernetes).

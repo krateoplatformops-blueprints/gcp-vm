@@ -1,0 +1,13 @@
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: {{ .Values.vmName }}-subnetwork
+  namespace: {{ .Values.namespace | default "default" }}
+spec:
+  networkRef:
+    name: {{ .Values.vmName }}-network
+  ipCidrRange: 10.2.0.0/16
+  region: {{ .Values.vmRegion | default "europe-central2" }}
+  secondaryIpRange:
+    - rangeName: cloudrange
+      ipCidrRange: 10.3.16.0/20

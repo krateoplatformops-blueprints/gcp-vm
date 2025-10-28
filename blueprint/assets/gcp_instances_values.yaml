@@ -1,0 +1,16 @@
+# GCP VM Size Mapping
+# Utility file, currently not in use for template rendering
+gcpVmSizeDefault: e2-small
+gcpVmSizes:
+  - cpu: 1
+    memory: 1
+    size: e2-micro
+  - cpu: 1
+    memory: 2
+    size: e2-small
+  - cpu: 2
+    memory: 8
+    size: e2-standard-2
+  - cpu: 4
+    memory: 16
+    size: e2-standard-4

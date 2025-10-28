@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "namespace": {
+      "default": "default",
+      "description": "Namespace where all resources will be deployed.",
+      "title": "namespace",
+      "type": "string"
+    },
+    "vmName": {
+      "default": "test-vm",
+      "description": "The name of the composition and Virtual Machine.",
+      "title": "vmName",
+      "type": "string"
+    },
+    "vmRegion": {
+      "default": "europe-central2",
+      "description": "The region where the Virtual Machine will be deployed.",
+      "enum": [
+        "europe-central2",
+        "europe-north1",
+        "europe-southwest1",
+        "europe-west10"
+      ],
+      "title": "vmRegion",
+      "type": "string"
+    },
+    "vmSize": {
+      "default": "e2-micro",
+      "description": "The size of the Virtual Machine.",
+      "enum": [
+        "e2-micro",
+        "e2-small",
+        "e2-standard-2",
+        "e2-standard-4"
+      ],
+      "title": "vmSize",
+      "type": "string"
+    }
+  },
+  "required": [
+    "vmName",
+    "vmSize",
+    "vmRegion"
+  ],
+  "type": "object"
+}

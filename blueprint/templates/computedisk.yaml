@@ -1,0 +1,13 @@
+{{- $regionZoneMap := (.Files.Get "assets/gcp_region_zone_map.yaml") | fromYaml -}}
+{{- $zone := include "getZone" (list $regionZoneMap .Values.vmRegion .Values.vmName) -}}
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeDisk
+metadata:
+  name: {{ .Values.vmName }}-disk
+  namespace: {{ .Values.namespace | default "default" }}
+spec:
+  physicalBlockSizeBytes: 4096
+  size: 1
+  type: pd-ssd
+  location: {{ $zone }} # this must be a zone and not a region

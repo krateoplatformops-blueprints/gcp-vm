@@ -1,0 +1,40 @@
+{{- $regionZoneMap := (.Files.Get "assets/gcp_region_zone_map.yaml") | fromYaml -}}
+{{- $zone := include "getZone" (list $regionZoneMap .Values.vmRegion .Values.vmName) -}}
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeInstance
+metadata:
+  annotations:
+    cnrm.cloud.google.com/allow-stopping-for-update: "true"
+  name: {{ .Values.vmName }}
+  namespace: {{ .Values.namespace | default "default" }}
+  labels:
+    created-from: "image"
+    network-type: "subnetwork"
+spec:
+  machineType: {{ .Values.vmSize }}
+  zone: {{ $zone }} # this must be a zone and not a region
+  bootDisk:
+    initializeParams:
+      size: 24
+      type: pd-ssd
+      sourceImageRef:
+        external: debian-cloud/debian-11
+  networkInterface:
+    - subnetworkRef:
+        name: {{ .Values.vmName }}-subnetwork
+      aliasIpRange:
+        - ipCidrRange: /24
+          subnetworkRangeName: cloudrange
+  attachedDisk:
+    - sourceDiskRef:
+        name: {{ .Values.vmName }}-disk
+      mode: READ_WRITE
+      deviceName: persistentdisk
+  #minCpuPlatform: "Intel Skylake"
+  #serviceAccount:
+  #  serviceAccountRef:
+  #    name: {{ .Values.vmName }}-serviceaccount
+  #  scopes:
+  #  - compute-rw
+  #  - logging-write

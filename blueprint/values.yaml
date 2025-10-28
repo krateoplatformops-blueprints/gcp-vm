@@ -1,0 +1,37 @@
+# @schema
+# description: Namespace where all resources will be deployed.
+# type: string
+# default: default
+# @schema
+namespace: default
+# @schema
+# type: string
+# required: true
+# description: The name of the composition and Virtual Machine.
+# default: test-vm
+# @schema
+vmName: test-vm
+# @schema
+# type: string
+# required: true
+# description: The size of the Virtual Machine.
+# enum:
+#   - e2-micro
+#   - e2-small
+#   - e2-standard-2
+#   - e2-standard-4
+# default: e2-micro
+# @schema
+vmSize: e2-small
+# @schema
+# type: string
+# required: true
+# description: The region where the Virtual Machine will be deployed.
+# enum:
+#   - europe-central2
+#   - europe-north1
+#   - europe-southwest1
+#   - europe-west10
+# default: europe-central2
+# @schema
+vmRegion: europe-central2
